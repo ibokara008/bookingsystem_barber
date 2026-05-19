@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBZ Barber – Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --svart: #0a0a0a;
+            --gull: #c9a84c;
+            --gull-lys: #e8c97a;
+            --hvit: #f5f0e8;
+            --grå: #1e1e1e;
+            --grå2: #2d2d2d;
+            --rød: #c0392b;
+        }
+
+        body {
+            background-color: var(--svart);
+            color: var(--hvit);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--grå);
+            border-bottom: 2px solid var(--gull);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gull);
+            letter-spacing: 2px;
+        }
+
+        .logo span { color: var(--hvit); }
+
+        nav a {
+            color: var(--hvit);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--gull); }
+
+        .topp {
+            padding: 50px 40px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .topp h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gull);
+            margin-bottom: 6px;
+        }
+
+        .topp p {
+            color: #777;
+            font-size: 0.95rem;
+        }
+
+        .strek {
+            width: 50px;
+            height: 3px;
+            background: var(--gull);
+            margin: 16px 0 30px;
+        }
+
+        .antall-badge {
+            display: inline-block;
+            background: var(--gull);
+            color: var(--svart);
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+
+        .innhold {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px 60px;
+        }
+
+        /* Tom tilstand */
+        .tom {
+            text-align: center;
+            padding: 80px 20px;
+            color: #555;
+        }
+
+        .tom .ikon { font-size: 3rem; margin-bottom: 16px; }
+        .tom p { font-size: 1.1rem; }
+
+        /* Tabell */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--grå2);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+
+        thead {
+            background: #141414;
+            border-bottom: 2px solid var(--gull);
+        }
+
+        th {
+            padding: 16px 18px;
+            text-align: left;
+            font-size: 0.8rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 400;
+        }
+
+        td {
+            padding: 16px 18px;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #2a2a2a;
+            vertical-align: middle;
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        tr:hover td { background: #252525; }
+
+        .tjeneste-tag {
+            background: #141414;
+            border: 1px solid var(--gull);
+            color: var(--gull);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .slett-knapp {
+            display: inline-block;
+            padding: 7px 16px;
+            background: transparent;
+            color: var(--rød);
+            border: 1px solid var(--rød);
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .slett-knapp:hover {
+            background: var(--rød);
+            color: white;
+        }
+
+        footer {
+            background: var(--grå);
+            border-top: 1px solid #2a2a2a;
+            text-align: center;
+            padding: 25px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        footer span { color: var(--gull); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">IBZ <span>Barber</span></div>
+        <nav>
+            <a href="/">Hjem</a>
+            <a href="/admin">Admin</a>
+        </nav>
+    </header>
+
+    <div class="topp">
+        <h2>
+            Administrasjon
+            <span class="antall-badge">{{ bestillinger|length }} bestillinger</span>
+        </h2>
+        <div class="strek"></div>
+        <p>Oversikt over alle bookinger. Klikk "Slett" for å fjerne en bestilling.</p>
+    </div>
+
+    <div class="innhold">
+
+        {% if bestillinger %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Navn</th>
+                    <th>Telefon</th>
+                    <th>Tjeneste</th>
+                    <th>Dato</th>
+                    <th>Tid</th>
+                    <th>Handling</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for b in bestillinger %}
+                <tr>
+                    <td style="color: #555;">{{ b.id }}</td>
+                    <td>{{ b.navn }}</td>
+                    <td style="color: #aaa;">{{ b.telefon }}</td>
+                    <td><span class="tjeneste-tag">{{ b.tjeneste }}</span></td>
+                    <td>{{ b.dato }}</td>
+                    <td>{{ b.tid }}</td>
+                    <td>
+                        <a href="/slett/{{ b.id }}"
+                           class="slett-knapp"
+                           onclick="return confirm('Vil du slette denne bookingen?')">
+                            Slett
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% else %}
+        <div class="tom">
+            <div class="ikon">📭</div>
+            <p>Ingen bestillinger ennå.</p>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <footer>
+        <p>© 2026 <span>IBZ Barber</span> — Admin-panel</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBZ Barber – Book time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --svart: #0a0a0a;
+            --gull: #c9a84c;
+            --gull-lys: #e8c97a;
+            --hvit: #f5f0e8;
+            --grå: #1e1e1e;
+            --grå2: #2d2d2d;
+        }
+
+        body {
+            background-color: var(--svart);
+            color: var(--hvit);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background-color: var(--grå);
+            border-bottom: 2px solid var(--gull);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gull);
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: var(--hvit);
+        }
+
+        nav a {
+            color: var(--hvit);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.95rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gull);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 60px;
+            background: linear-gradient(180deg, var(--grå) 0%, var(--svart) 100%);
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            color: var(--gull);
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #aaa;
+            font-weight: 300;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .strek {
+            width: 60px;
+            height: 3px;
+            background: var(--gull);
+            margin: 20px auto;
+        }
+
+        /* ===== TJENESTER ===== */
+        .tjenester {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 50px 20px;
+            flex-wrap: wrap;
+        }
+
+        .tjeneste-kort {
+            background: var(--grå2);
+            border: 1px solid #333;
+            border-top: 3px solid var(--gull);
+            padding: 28px 24px;
+            width: 190px;
+            text-align: center;
+            border-radius: 4px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .tjeneste-kort:hover {
+            transform: translateY(-5px);
+            border-color: var(--gull-lys);
+        }
+
+        .tjeneste-kort .ikon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .tjeneste-kort h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--hvit);
+            margin-bottom: 8px;
+        }
+
+        .tjeneste-kort .pris {
+            color: var(--gull);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* ===== BOOKINGSKJEMA ===== */
+        .booking-seksjon {
+            max-width: 580px;
+            margin: 0 auto;
+            padding: 20px 20px 80px;
+        }
+
+        .booking-seksjon h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gull);
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .booking-seksjon .undertittel {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 0.95rem;
+        }
+
+        form {
+            background: var(--grå2);
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 40px;
+        }
+
+        .form-gruppe {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #bbb;
+            font-size: 0.88rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px 16px;
+            background: #141414;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            color: var(--hvit);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--gull);
+        }
+
+        select option {
+            background: #141414;
+        }
+
+        .rad {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .knapp {
+            width: 100%;
+            padding: 15px;
+            background: var(--gull);
+            color: var(--svart);
+            border: none;
+            border-radius: 4px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .knapp:hover {
+            background: var(--gull-lys);
+            transform: translateY(-2px);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--grå);
+            border-top: 1px solid #2a2a2a;
+            text-align: center;
+            padding: 30px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        footer span {
+            color: var(--gull);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">IBZ <span>Barber</span></div>
+        <nav>
+            <a href="/">Hjem</a>
+            <a href="/admin">Admin</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>IBZ Barber</h1>
+        <div class="strek"></div>
+        <p>Profesjonell barbering og klipp i hjertet av byen. Book din time enkelt og raskt.</p>
+    </section>
+
+    <!-- Tjenesteoversikt -->
+    <div class="tjenester">
+        <div class="tjeneste-kort">
+            <div class="ikon">✂️</div>
+            <h3>Klipp</h3>
+            <div class="pris">249 kr</div>
+        </div>
+        <div class="tjeneste-kort">
+            <div class="ikon">🪒</div>
+            <h3>Skjegg</h3>
+            <div class="pris">199 kr</div>
+        </div>
+        <div class="tjeneste-kort">
+            <div class="ikon">💈</div>
+            <h3>Klipp + Skjegg</h3>
+            <div class="pris">399 kr</div>
+        </div>
+        <div class="tjeneste-kort">
+            <div class="ikon">👶</div>
+            <h3>Barneklipp</h3>
+            <div class="pris">149 kr</div>
+        </div>
+    </div>
+
+    <!-- Bookingskjema -->
+    <section class="booking-seksjon">
+        <h2>Book din time</h2>
+        <p class="undertittel">Fyll ut skjemaet under så bekrefter vi umiddelbart</p>
+
+        <form action="/book" method="POST">
+
+            <div class="form-gruppe">
+                <label for="navn">Fullt navn</label>
+                <input type="text" id="navn" name="navn" placeholder="Ola Nordmann" required>
+            </div>
+
+            <div class="form-gruppe">
+                <label for="telefon">Telefonnummer</label>
+                <input type="tel" id="telefon" name="telefon" placeholder="900 00 000" required>
+            </div>
+
+            <div class="form-gruppe">
+                <label for="tjeneste">Velg tjeneste</label>
+                <select id="tjeneste" name="tjeneste" required>
+                    <option value="">-- Velg tjeneste --</option>
+                    <option value="Klipp">Klipp – 249 kr</option>
+                    <option value="Skjegg">Skjegg – 199 kr</option>
+                    <option value="Klipp + Skjegg">Klipp + Skjegg – 399 kr</option>
+                    <option value="Barneklipp">Barneklipp – 149 kr</option>
+                </select>
+            </div>
+
+            <div class="rad">
+                <div class="form-gruppe">
+                    <label for="dato">Dato</label>
+                    <input type="date" id="dato" name="dato" required>
+                </div>
+                <div class="form-gruppe">
+                    <label for="tid">Tidspunkt</label>
+                    <input type="time" id="tid" name="tid" min="09:00" max="18:00" required>
+                </div>
+            </div>
+
+            <button type="submit" class="knapp">BOOK TIME</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2026 <span>IBZ Barber</span> — Alle rettigheter reservert</p>
+        <p style="margin-top: 8px;">📍 Storgata 12, Oslo &nbsp;|&nbsp; 📞 92 34 56 78</p>
+    </footer>
+
+</body>
+</html>
